@@ -1,13 +1,15 @@
 from gui import *
 
 
-def main():
+def main() -> None:
     """
-    - Change the window title to 'Lab 10'.
-    - Set its length to 250 and height to 180.
-    - Make the window non-resizable.
+    Creates the GUI window, sets its size, disables window resizing, and changed the title of the window.
+    :return: tkinter window
     """
     window = Tk()
+    window.title('Project 1')
+    window.geometry('400x250')
+    window.resizable(False, False)
     widgets = GUI(window)
     window.mainloop()
 
