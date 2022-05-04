@@ -1,16 +1,9 @@
-import unittest
+from person import *
 
-class MyTestCase(unittest.TestCase):
-    def test_name(self):
+class Test:
+    def setup_method(self):
+        self.P1 = Person(name, age, email, position, language)
 
-    def test_age(self):
+    def test_gui(self):
+        assert self.P1.__str__() == ''
 
-    def test_email(self):
-
-    def test_status(self):
-
-    def test_lan(self):
-
-
-if __name__ == '__main__':
-    unittest.main()

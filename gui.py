@@ -1,6 +1,7 @@
 #This is a modification of Lab 10
 
 from tkinter import *
+from person import *
 
 import csv
 
@@ -54,18 +55,22 @@ class GUI:
         self.radio_both.pack (side = 'left')
         self.frame_status.pack(anchor='w', pady=10)
 
-        # Favorite language radio buttons
+        # Coding language check buttons
         self.frame_lan = Frame(self.window)
-        self.label_lan = Label(self.frame_lan, text='Favorite Coding Language')
-        self.lan = IntVar()
-        self.lan.set(None)
-        self.radio_python = Radiobutton(self.frame_lan, text = 'Python', variable = self.lan, value = 0)
-        self.radio_c = Radiobutton(self.frame_lan, text = 'C++', variable = self.lan, value = 1)
-        self.radio_java = Radiobutton(self.frame_lan, text = 'Java', variable = self.lan, value = 2)
+        self.label_lan = Label(self.frame_lan, text='Coding Languages')
+        self.p_var = IntVar()
+        self.c_var = IntVar()
+        self.j_var = IntVar()
+        self.pearl_var = IntVar()
+        self.check_python = Checkbutton(self.frame_lan, text='Python', variable=self.p_var)
+        self.check_c = Checkbutton(self.frame_lan, text='C++', variable=self.c_var)
+        self.check_java = Checkbutton(self.frame_lan, text='Java', variable=self.j_var)
+        self.check_pearl = Checkbutton(self.frame_lan, text='Pearl', variable=self.pearl_var)
         self.label_lan.pack(padx=5, side='left')
-        self.radio_python.pack (side = 'left')
-        self.radio_c.pack (side = 'left')
-        self.radio_java.pack (side = 'left')
+        self.check_python.pack(side='left')
+        self.check_c.pack(side='left')
+        self.check_java.pack(side='left')
+        self.check_pearl.pack(side='left')
         self.frame_lan.pack(anchor='w', pady=10)
 
         # Save button
@@ -91,12 +96,15 @@ class GUI:
         else:
             position = 'Both'
 
-        if self.lan.get() == 0:
-            language = 'Python'
-        elif self.lan.get() == 1:
-            language = 'C++'
-        else:
-            language = 'Java'
+        language = []
+        if self.p_var.get() == 1:
+            language.append('Python')
+        if self.j_var.get() == 1:
+            language.append('Java')
+        if self.c_var.get() == 1:
+            language.append('C++')
+        if self.pearl_var.get() == 1:
+            language.append('Pearl')
 
         info = [name, age, email, position, language]
 
@@ -104,8 +112,20 @@ class GUI:
             records = csv.writer(csvfile)
             records.writerow(info)
 
+        p1 = Person(name, age, email, position, language)
+        """
+        p1.name = name
+        p1.age = age
+        p1.email = email
+        p1.position = position
+        p1.lan = language
+        """
+
         self.entry_name.delete(0, END)
         self.entry_age.delete(0, END)
         self.entry_email.delete(0, END)
         self.status.set(None)
-        self.lan.set(None)
+        self.check_python.deselect()
+        self.check_c.deselect()
+        self.check_java.deselect()
+        self.check_pearl.deselect()
