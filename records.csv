@@ -1,8 +1,2 @@
-Name,Age,Status
-Jane,10,Student
-Bella,18,be@unomaha,Both,Python
-Bella,18,bd@unomaha.edu,Both,"['Python', 'Java']"
-Bella,21,bd,Both,"['Python', 'Java']"
-Bella,21,bd,Both,"['Python', 'Java']"
-b,10,b,Both,"['Java', 'C++']"
-b,10,b,Staff,['Python']
+Name,Age,Email,Position,Languages
+Bella ,19,bd,Both,['Python']

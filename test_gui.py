@@ -1,9 +1,10 @@
-from person import *
+from gui import *
 
 class Test:
     def setup_method(self):
-        self.P1 = Person(name, age, email, position, language)
+        self.person_1 = Person(, age, email, position, language)
 
     def test_gui(self):
-        assert self.P1.__str__() == ''
+        self.__str__()
+        assert self.person_1.__str__() == ''
 

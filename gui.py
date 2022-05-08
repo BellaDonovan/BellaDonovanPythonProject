@@ -1,7 +1,6 @@
 #This is a modification of Lab 10
 
 from tkinter import *
-from person import *
 
 import csv
 
@@ -108,18 +107,15 @@ class GUI:
 
         info = [name, age, email, position, language]
 
-        with open ('records.csv', 'a', newline = '') as csvfile:
+        #fieldnames = ['Name', 'Age', 'Email', 'Position', 'Languages']
+
+        with open('records.csv', 'a', newline='') as csvfile:
+            #csvfile.writerow(fieldnames)
             records = csv.writer(csvfile)
             records.writerow(info)
 
-        p1 = Person(name, age, email, position, language)
-        """
-        p1.name = name
-        p1.age = age
-        p1.email = email
-        p1.position = position
-        p1.lan = language
-        """
+        person_1 = Person(name, age, email, position, language)
+        person_1.__str__()
 
         self.entry_name.delete(0, END)
         self.entry_age.delete(0, END)
@@ -129,3 +125,15 @@ class GUI:
         self.check_c.deselect()
         self.check_java.deselect()
         self.check_pearl.deselect()
+
+class Person:
+    def __init__(self, name, age, email, position, language):
+        self.name = name
+        self.age = age
+        self.email = email
+        self.position = position
+        self.language = language
+
+    def __str__(self):
+        return f'Name : {self.name}, Age : {self.age}, Email : {self.email}, Position : {self.position}, Language(s) : {self.language}'
+
