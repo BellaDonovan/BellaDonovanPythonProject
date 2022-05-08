@@ -127,13 +127,28 @@ class GUI:
         self.check_pearl.deselect()
 
 class Person:
-    def __init__(self, name, age, email, position, language):
+    '''
+    A class used to create an instance (person) everytime the save button is clicked. Used for testing purposes.
+    '''
+    def __init__(self, name, age, email, position, language) -> None:
+        '''
+        Constructor assigns attributes to each instance (person) of the class corresponding to the input of the GUI.
+        :param name: Name of person
+        :param age: Person Age
+        :param email: Person Email
+        :param position: Person position (student, staff, or both)
+        :param language: Languages the person knows
+        '''
         self.name = name
         self.age = age
         self.email = email
         self.position = position
         self.language = language
 
-    def __str__(self):
+    def __str__(self) -> string:
+        '''
+        Method to print out the attributes of each person (instance)
+        :return: String value of all the atrributes
+        '''
         return f'Name : {self.name}, Age : {self.age}, Email : {self.email}, Position : {self.position}, Language(s) : {self.language}'
 
