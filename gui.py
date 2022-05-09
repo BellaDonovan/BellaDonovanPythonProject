@@ -133,7 +133,7 @@ class GUI:
             self.entry_name.delete(0, END)
             self.entry_age.delete(0, END)
             self.entry_email.delete(0, END)
-            self.status.set(None)
+            self.status.set(0)
             self.check_python.deselect()
             self.check_c.deselect()
             self.check_java.deselect()

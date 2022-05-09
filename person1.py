@@ -18,26 +18,51 @@ class Person:
         self.__position = position
         self.__language = language
 
-    def get_name(self):
+    def get_name(self) -> str:
+        """
+        Method to get the value of self.__name
+        :return: str
+        """
         return self.__name
 
-    def get_age(self):
+    def get_age(self) -> int:
+        """
+        Method to get the value of self.__age
+        :return: int
+        """
         return self.__age
 
-    def get_email(self):
+    def get_email(self) -> str:
+        """
+        Method to get the value of self.__email
+        :return: str
+        """
         return self.__email
 
-    def get_position(self):
+    def get_position(self) -> str:
+        """
+        Method to get the value of self.__position
+        :return: str
+        """
         return self.__position
 
-    def get_language(self):
+    def get_language(self) -> list:
+        """
+        Method to get the value of self.__language
+        :return: list
+        """
         return self.__language
 
-    def set_age(self, age):
+    def set_age(self, age) -> None:
+        """
+        Method to set the age to 0 if a negative value is entered
+        :param age: int
+        :return: None
+        """
         if age < 0:
             self.__age = 0
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Method to print out the attributes of each person (instance)
         :return: String value of all the attributes

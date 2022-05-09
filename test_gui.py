@@ -11,9 +11,9 @@ class Test:
         :return: None
         """
         self.person_1 = Person('Jane', 16, 'jane@gmail.com', 'Both', '[Python]')
-        self.person_2 = Person('Jane', -16, 'jane@gmail.com', 'Both', '[Python]')
-        self.person_3 = Person('Jane', 16, 'jane@gmail.com', 'Both', '[]')
-        self.person_4 = Person('Jane', 16, 'jane@gmail.com', 'Both', '[Python, Java]')
+        self.person_2 = Person('Jane', -16, 'jane@gmail.com', 'Student', '[Python]')
+        self.person_3 = Person('Jane', 0, 'jane@gmail.com', 'Staff', '[]')
+        self.person_4 = Person('Jane Smith', 16, 'jane@gmail.com', 'Both', '[Python, Java]')
 
     def test_gui(self) -> None:
         """
