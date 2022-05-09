@@ -8,7 +8,7 @@ def main() -> None:
     """
     window = Tk()
     window.title('Project 1')
-    window.geometry('400x250')
+    window.geometry('400x300')
     window.resizable(False, False)
     widgets = GUI(window)
     window.mainloop()

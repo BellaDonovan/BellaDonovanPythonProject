@@ -1,8 +1,9 @@
-#This is a modification of Lab 10
+# This is a modification of Lab 10
 
 from tkinter import *
-
+from person1 import *
 import csv
+
 
 class GUI:
     """
@@ -21,7 +22,7 @@ class GUI:
         self.entry_name = Entry(self.frame_name)
         self.label_name.pack(padx=5, side='left')
         self.entry_name.pack(padx=11, side='left')
-        self.frame_name.pack(anchor='w', pady=10) # anchor='w' helps to change the frame position from center to west.
+        self.frame_name.pack(anchor='w', pady=10)
 
         # Age entry box
         self.frame_age = Frame(self.window)
@@ -39,19 +40,19 @@ class GUI:
         self.entry_email.pack(padx=15, side='left')
         self.frame_email.pack(anchor='w', pady=10)
 
-
         # Position / status radio buttons
         self.frame_status = Frame(self.window)
         self.label_status = Label(self.frame_status, text='Position')
         self.status = IntVar()
-        self.status.set(None)
-        self.radio_student = Radiobutton(self.frame_status, text = 'Student', variable = self.status, value = 0)
-        self.radio_staff = Radiobutton(self.frame_status, text = 'Staff', variable = self.status, value = 1)
-        self.radio_both = Radiobutton(self.frame_status, text = 'Both', variable = self.status, value = 2)
+
+        # self.status.set(None)
+        self.radio_student = Radiobutton(self.frame_status, text='Student', variable=self.status, value=0)
+        self.radio_staff = Radiobutton(self.frame_status, text='Staff', variable=self.status, value=1)
+        self.radio_both = Radiobutton(self.frame_status, text='Both', variable=self.status, value=2)
         self.label_status.pack(padx=5, side='left')
-        self.radio_student.pack (side = 'left')
-        self.radio_staff.pack (side = 'left')
-        self.radio_both.pack (side = 'left')
+        self.radio_student.pack(side='left')
+        self.radio_staff.pack(side='left')
+        self.radio_both.pack(side='left')
         self.frame_status.pack(anchor='w', pady=10)
 
         # Coding language check buttons
@@ -72,6 +73,12 @@ class GUI:
         self.check_pearl.pack(side='left')
         self.frame_lan.pack(anchor='w', pady=10)
 
+        # Error Label
+        self.frame_error = Frame(self.window)
+        self.label_error = Label(self.frame_error, text='')
+        self.label_error.pack()
+        self.frame_error.pack()
+
         # Save button
         self.frame_button = Frame(self.window)
         self.save_button = Button(self.frame_button, text='SAVE', command=self.clicked)
@@ -84,71 +91,56 @@ class GUI:
         and favorite language of the user. Then, send the data to a csv file. Rests the entry boxes and radio buttons.
         :return: The name, age, email, position, and favorite language
         """
-        name = self.entry_name.get()
-        age = int(self.entry_age.get())
-        email = self.entry_email.get()
+        try:
+            name = self.entry_name.get()
+            if len(name) <= 0:
+                raise TypeError('Name should have a value')
 
-        if self.status.get() == 0:
-            position = 'Student'
-        elif self.status.get() == 1:
-            position = 'Staff'
-        else:
-            position = 'Both'
+            age = self.entry_age.get()
+            if len(age) <= 0:
+                raise TypeError('Age should have a value')
+            age = int(age)
 
-        language = []
-        if self.p_var.get() == 1:
-            language.append('Python')
-        if self.j_var.get() == 1:
-            language.append('Java')
-        if self.c_var.get() == 1:
-            language.append('C++')
-        if self.pearl_var.get() == 1:
-            language.append('Pearl')
+            email = self.entry_email.get()
+            if len(email) <= 0:
+                raise TypeError('Email should have a value')
 
-        info = [name, age, email, position, language]
+            if self.status.get() == 0:
+                position = 'Student'
+            elif self.status.get() == 1:
+                position = 'Staff'
+            else:
+                position = 'Both'
 
-        #fieldnames = ['Name', 'Age', 'Email', 'Position', 'Languages']
+            language = []
+            if self.p_var.get() == 1:
+                language.append('Python')
+            if self.j_var.get() == 1:
+                language.append('Java')
+            if self.c_var.get() == 1:
+                language.append('C++')
+            if self.pearl_var.get() == 1:
+                language.append('Pearl')
 
-        with open('records.csv', 'a', newline='') as csvfile:
-            #csvfile.writerow(fieldnames)
-            records = csv.writer(csvfile)
-            records.writerow(info)
+            person_1 = Person(name, age, email, position, language)
 
-        person_1 = Person(name, age, email, position, language)
-        person_1.__str__()
+            info = [person_1.get_name(), person_1.get_age(), person_1.get_email(), person_1.get_position(), person_1.get_language()]
 
-        self.entry_name.delete(0, END)
-        self.entry_age.delete(0, END)
-        self.entry_email.delete(0, END)
-        self.status.set(None)
-        self.check_python.deselect()
-        self.check_c.deselect()
-        self.check_java.deselect()
-        self.check_pearl.deselect()
+            with open('records.csv', 'a', newline='') as csvfile:
+                records = csv.writer(csvfile)
+                records.writerow(info)
 
-class Person:
-    '''
-    A class used to create an instance (person) everytime the save button is clicked. Used for testing purposes.
-    '''
-    def __init__(self, name, age, email, position, language) -> None:
-        '''
-        Constructor assigns attributes to each instance (person) of the class corresponding to the input of the GUI.
-        :param name: Name of person
-        :param age: Person Age
-        :param email: Person Email
-        :param position: Person position (student, staff, or both)
-        :param language: Languages the person knows
-        '''
-        self.name = name
-        self.age = age
-        self.email = email
-        self.position = position
-        self.language = language
+            self.entry_name.delete(0, END)
+            self.entry_age.delete(0, END)
+            self.entry_email.delete(0, END)
+            self.status.set(None)
+            self.check_python.deselect()
+            self.check_c.deselect()
+            self.check_java.deselect()
+            self.check_pearl.deselect()
 
-    def __str__(self) -> string:
-        '''
-        Method to print out the attributes of each person (instance)
-        :return: String value of all the atrributes
-        '''
-        return f'Name : {self.name}, Age : {self.age}, Email : {self.email}, Position : {self.position}, Language(s) : {self.language}'
-
+        except TypeError as e:
+            self.label_error.config(text=f'{e}')
+        except ValueError:
+            self.label_error.config(text='Age should be integer')
+            self.entry_age.delete(0, END)
